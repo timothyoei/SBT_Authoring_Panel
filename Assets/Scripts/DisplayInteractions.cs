@@ -19,6 +19,7 @@ public class DisplayInteractions : MonoBehaviour, IPointerClickHandler
         textHolder = this.transform.GetChild(0).gameObject;
         textMesh = textHolder.GetComponent<TextMeshProUGUI>();
     }
+
     public void OnPointerClick(PointerEventData data)
     {
         // Display or hide all interactions of the current rep and

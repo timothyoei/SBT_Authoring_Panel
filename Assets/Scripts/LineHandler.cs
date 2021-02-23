@@ -19,6 +19,7 @@ public class LineHandler : MonoBehaviour
 
 	private void LateUpdate()
 	{
+		// Set the coordinates of the end vertices
 		lineRenderer.SetPosition(0, this.transform.position);
 		lineRenderer.SetPosition(1, target.transform.position);
 	}

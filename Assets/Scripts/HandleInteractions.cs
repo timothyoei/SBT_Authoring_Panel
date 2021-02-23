@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-// TODO: figure out why tabbing is so offset in this file
-
 public class HandleInteractions : MonoBehaviour
 {
 	public GameObject interactRep, inspectorRep, createButton, linePrefab;

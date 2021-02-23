@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+// Personal TODO: figure out why tabbing is so weird in editor
+
 public class ModelClick : MonoBehaviour, IPointerClickHandler 
 {
     public GameObject canvas;

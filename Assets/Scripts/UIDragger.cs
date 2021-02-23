@@ -8,17 +8,14 @@ using System;
 // rather than its previous position
 
 // TODO: Stop reps from overlapping with active reps
-public class InteractDragger : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler 
+public class UIDragger : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler 
 {
     private Vector3[] parentCorners = new Vector3[4], corners = new Vector3[4];
     private Vector3 prevPos;
     private RectTransform rt, parentRt;
-    private LineHandler lineHandlerScript;
 
     private void Start()
     {
-        lineHandlerScript = this.transform.GetComponent<LineHandler>();
-
         // Get the UI transform equivalents needed for position analysis
         rt = GetComponent<RectTransform>();
         parentRt = this.transform.parent.GetComponent<RectTransform>();

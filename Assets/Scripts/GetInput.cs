@@ -10,10 +10,8 @@ public class GetInput : MonoBehaviour
     private HandleInteractions canvasScript;
     private ShowInput createInteractionScript;
 	private string interactName, defaultString = "ENTER INTERACTION NAME";
-    
-    // TODO: Handle pre-emptive input entry
 
-    private void Start()
+	private void Start()
     {
         canvasScript = this.transform.parent.GetComponent<HandleInteractions>();
 

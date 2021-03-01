@@ -2,40 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using TMPro;
+using Microsoft.MixedReality.Toolkit.Input;
+using UnityEngine.UI;
 
-// TODO: When switching between reps, the input field's text does not update
+// TODO 2/22/21: When switching between reps, the input field's text does not update
+// TODO 2/25/21: Handle edge case when returning after text has been inputted
 
-public class ShowInput : MonoBehaviour, IPointerClickHandler
+public class ShowInput : MonoBehaviour, IMixedRealityPointerHandler 
 {
     public GameObject inputField;
-    private GameObject textHolder;
-    private TextMeshProUGUI textMesh;
-    
-    public void Start()
+    private Text textHolder, inputTextHolder;
+    private string defaultMsg = "Create Interaction", altMsg = "Return", inputDefaultMsg = "";
+
+    private void Start()
     {
-        // Retrieve the TMP components needed to update the text fields
-        textHolder = this.transform.GetChild(0).gameObject;
-        textMesh = textHolder.GetComponent<TextMeshProUGUI>();
+        // Get components needed to update text fields
+        textHolder = this.transform.GetChild(0).gameObject.GetComponent<Text>();
+        inputTextHolder = inputField.transform.GetChild(0).gameObject.GetComponent<Text>();
     }
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClicked(MixedRealityPointerEventData data)
     {
-        if (!inputField.activeSelf) // display inputField
+        if (!inputField.activeSelf) // display inputField and update text for interact creation
         {
             inputField.SetActive(true);
-            textMesh.text = "Return";
+            textHolder.text = altMsg;
         }
-        else // hide inputField
+        else // hide inputField and update text for exiting interact creation
         {
             inputField.SetActive(false);
-            textMesh.text = "Create Interaction";
+            textHolder.text = defaultMsg;
         }
     }
+
+    public void OnPointerDown(MixedRealityPointerEventData data) {}
+
+    public void OnPointerDragged(MixedRealityPointerEventData data) {}
+
+    public void OnPointerUp(MixedRealityPointerEventData data) {}
 
     public void returnDefault()
     {
-        // Hide inputField after interaction is created
         inputField.SetActive(false);
-        textMesh.text = "Create Interaction";
+        textHolder.text = defaultMsg;
+        inputTextHolder.text = inputDefaultMsg;
     }
 }

@@ -4,26 +4,25 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
 using Microsoft.MixedReality.Toolkit.Input;
+using UnityEngine.UI;
 
-// TODO: Sometimes the rep, when dragged off screen, will return to the center of the canvas
-// rather than its previous position
-
-// TODO: Stop reps from overlapping with active reps
-
-// TODO 2/25/21: Modify inBounds to work for all rotations of canvas
 public class UIDragger : MonoBehaviour, IMixedRealityPointerHandler
 {
+    private GameObject scrollView;
+    private ScrollRect scrollRect;
     private Vector3[] parentCorners = new Vector3[4], corners = new Vector3[4];
     private Vector3 prevPos;
     private float initX;
     private RectTransform rt, parentRt;
-    private List<Connection> connections;
 
     private void Start()
     {
         // Get the UI transform equivalents needed for position analysis
         rt = GetComponent<RectTransform>();
         parentRt = this.transform.parent.GetComponent<RectTransform>();
+
+        scrollView = this.transform.parent.parent.parent.gameObject;
+        scrollRect = scrollView.transform.GetComponent<ScrollRect>();
         
         // Set the last valid position to the initial position
         prevPos = transform.localPosition;
@@ -58,6 +57,7 @@ public class UIDragger : MonoBehaviour, IMixedRealityPointerHandler
         // Ensures that the new position has the same x-coordinate as the canvas
         // prevents accidental "englargement"
         transform.position = new Vector3(initX, data.Pointer.Position.y, data.Pointer.Position.z);
+        scrollRect.enabled = false;
     }
 
     public void OnPointerUp(MixedRealityPointerEventData data)
@@ -68,5 +68,6 @@ public class UIDragger : MonoBehaviour, IMixedRealityPointerHandler
         else
             // Update the last valid position
             prevPos = transform.localPosition;
+        scrollRect.enabled = true;
     }
 }

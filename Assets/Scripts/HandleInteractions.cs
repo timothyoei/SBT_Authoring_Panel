@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// TODO: Remove TMPro functionality
 public class HandleInteractions : MonoBehaviour
 {
 	public GameObject interactRep, inspectorRep, interactCreator, connectionManager;

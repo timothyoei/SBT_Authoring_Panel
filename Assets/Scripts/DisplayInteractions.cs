@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 using Microsoft.MixedReality.Toolkit.Input;
 using UnityEngine.UI;
 
-// TODO 2/25/21: Update text when interaction is created
 public class DisplayInteractions : MonoBehaviour, IMixedRealityPointerHandler
 {
     private Text textMsg;

@@ -4,16 +4,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Microsoft.MixedReality.Toolkit.Input;
 
-// Personal TODO: figure out why tabbing is so weird in editor
-
 public class ModelClick : MonoBehaviour, IMixedRealityPointerHandler 
 {
-    public GameObject canvas;
+    public GameObject content;
     private HandleReps handleRepsScript;
 
     private void Start() 
     {
-        handleRepsScript = canvas.transform.GetComponent<HandleReps>();
+        handleRepsScript = content.transform.GetComponent<HandleReps>();
     }
 
     public void OnPointerClicked(MixedRealityPointerEventData data)

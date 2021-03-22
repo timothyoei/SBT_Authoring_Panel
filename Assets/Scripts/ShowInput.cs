@@ -5,9 +5,6 @@ using UnityEngine.EventSystems;
 using Microsoft.MixedReality.Toolkit.Input;
 using UnityEngine.UI;
 
-// TODO 2/22/21: When switching between reps, the input field's text does not update
-// TODO 2/25/21: Handle edge case when returning after text has been inputted
-
 public class ShowInput : MonoBehaviour, IMixedRealityPointerHandler 
 {
     public GameObject inputField;

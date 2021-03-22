@@ -1179,6 +1179,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 644556525420171425, guid: 2582f4cd2cc57f24db97cd85b0b3218a, type: 3}
+      propertyPath: m_Colors.m_ColorMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 644556525447395244, guid: 2582f4cd2cc57f24db97cd85b0b3218a, type: 3}
       propertyPath: m_Enabled
       value: 1

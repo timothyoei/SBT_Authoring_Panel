@@ -7,15 +7,12 @@ using UnityEngine.UI;
 
 public class DisplayInteractions : MonoBehaviour, IMixedRealityPointerHandler
 {
+    public HandleInteractions interactHandlerScript;
     private Text textMsg;
-    private HandleInteractions interactHandlerScript;
     private bool showing = false;
 
     private void Start()
-    {
-        interactHandlerScript = this.transform.parent.GetComponent<HandleInteractions>();
-        
-        // Retrieve the TMP components needed to update the text fields
+    {   
         textMsg = this.transform.GetChild(0).gameObject.GetComponent<Text>();
     }
 

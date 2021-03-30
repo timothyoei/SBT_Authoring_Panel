@@ -14,10 +14,16 @@ public class HandleReps : MonoBehaviour
 
     private void Start() 
     {
-		objectReps = new Dictionary<string, GameObject>();
-        
-		rt = this.transform.GetComponent<RectTransform>();
+        objectReps = new Dictionary<string, GameObject>();
+        rt = this.transform.GetComponent<RectTransform>();
         interactHandlerScript = this.transform.GetComponent<HandleInteractions>();
+
+        // Create and setup inspector rep to define object rep interacts with
+        inspectorRep = Instantiate(objectRep, this.transform);
+        inspectorRep.SetActive(false);
+        inspectorRep.transform.localPosition = new Vector3(-250, 0, 0);
+        inspectorRep.name = "Inspector Representation";
+        inspectorRep.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Inspector";
     }
 
     public void getRep(string modelName)
@@ -28,7 +34,9 @@ public class HandleReps : MonoBehaviour
 
         // Displays the rep and all of its interactions
         showRep(modelName);
+
         interactHandlerScript.toggleInteractions(true);
+
         if (!showingOptions)
             showOptions();
     }
@@ -37,6 +45,7 @@ public class HandleReps : MonoBehaviour
     {
         // Make a new rep and update its name and displayed text
         GameObject newRep = Instantiate(objectRep, this.transform);
+        newRep.transform.localPosition = new Vector3(250, 0, 0);
         newRep.name = modelName + " Representation";
         newRep.transform.GetChild(0).gameObject.GetComponent<Text>().text = modelName;
 
@@ -56,7 +65,7 @@ public class HandleReps : MonoBehaviour
             interactHandlerScript.toggleInteractions(false);
         }
         
-        // Make the selected rep visible and update which rep is being shown
+        // Update which rep is being shown
         showing = objectReps[modelName];
         objectReps[modelName].SetActive(true);
     }
@@ -66,10 +75,11 @@ public class HandleReps : MonoBehaviour
         inspectorRep.SetActive(true);
         interactCreator.SetActive(true);
         interactDisplayer.SetActive(true);
+        showingOptions = true;
     }
     
     public GameObject getShowing() 
     {
-        return showing; // the gameobject of the currently displayed rep
+        return showing;
     }
 }

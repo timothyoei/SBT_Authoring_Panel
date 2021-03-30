@@ -5,16 +5,13 @@ using UnityEngine.UI;
 
 public class GetInput : MonoBehaviour
 {
-	private InputField iField;
-	private HandleInteractions canvasScript;
+    public HandleInteractions canvasScript;
+    private InputField iField;
     private ShowInput createInteractionScript;
     private string interactName, defaultString = "";
 
 	private void Start()
     {
-        canvasScript = this.transform.parent.GetComponent<HandleInteractions>();
-
-		// Retrieve input field components
 		iField = this.transform.GetComponent<InputField>();
 		iField.text = defaultString;
     }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HandleInteractions : MonoBehaviour
 {
-	public GameObject interactRep, inspectorRep, interactCreator, connectionManager;
+	public GameObject interactRep, inspectorRep, interactCreator;
 	private Connection tempConnection;
 	private ConnectionPoint tempConnectionPoint;
 	private List<Connection> connections;
@@ -19,8 +19,8 @@ public class HandleInteractions : MonoBehaviour
 	private void Start()
 	{
 		interactReps = new Dictionary<GameObject, Dictionary<string, GameObject>>();
+		inspectorRep = this.transform.GetChild(0).gameObject;
 		inspectorRepRT = inspectorRep.GetComponent<RectTransform>();
-
 		handleRepsScript = this.transform.GetComponent<HandleReps>();
 		showInputScript = interactCreator.transform.GetComponent<ShowInput>();
 	}
@@ -51,20 +51,13 @@ public class HandleInteractions : MonoBehaviour
 
 	private void createInteraction(string interactName)
 	{
-		// Create a button to represent the interaction
+		// Setup interaction
 		GameObject newInteract = Instantiate(interactRep, currentRep.transform.parent.transform);
-
 		modelText = currentRep.transform.GetChild(0).gameObject.GetComponent<Text>().text;
-
-		// Update the name and text fields
 		newInteract.name = interactName + " Interaction " + "(" + modelText + ")";
 		newInteract.transform.GetChild(0).gameObject.GetComponent<Text>().text = interactName;
-
-		// Make the new interact invisible; let the showInteract() handle display functionality
-		newInteract.SetActive(false);
-
-		// Move the interact to the center of the canvas
 		newInteract.transform.localPosition = new Vector3(0, 0, 0);
+		newInteract.SetActive(false);
 
 		// Get the RectTransforms of the new connections
 		currentRepRT = currentRep.GetComponent<RectTransform>();
@@ -74,7 +67,7 @@ public class HandleInteractions : MonoBehaviour
 		ConnectionManager.CreateConnection(interactRT, inspectorRepRT);
 		ConnectionManager.CreateConnection(interactRT, currentRepRT);
 
-		// Set the connection options with the inspector rep
+		// Set up inspector rep connection options
 		tempConnection = ConnectionManager.FindConnection(interactRT, inspectorRepRT);
 		tempConnectionPoint = tempConnection.points[0];
 		tempConnectionPoint.direction = ConnectionPoint.ConnectionDirection.West;
@@ -83,7 +76,7 @@ public class HandleInteractions : MonoBehaviour
 		tempConnectionPoint.direction = ConnectionPoint.ConnectionDirection.East;
 		tempConnectionPoint.weight = 0.65f;
 
-		// Set the connection options with the current object rep
+		// Set up current object rep connection options
 		tempConnection = ConnectionManager.FindConnection(interactRT, currentRepRT);
 		tempConnectionPoint = tempConnection.points[0];
 		tempConnectionPoint.direction = ConnectionPoint.ConnectionDirection.East;
